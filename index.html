@@ -1,9 +1,157 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Frazzled Feeling Ceiling</title>
+  <style>
+    @font-face {
+      font-family: 'Anton';
+      src: url('Anton-Regular.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+    }
 
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Anton', sans-serif;
+      background-color: #fff6ee;
+      overflow: hidden;
+    }
+
+    .container {
+      height: 100%;
+      width: 100%;
+    }
+
+    .page {
+      height: 100%;
+      text-align: center;
+      padding: 2vw;
+    }
+
+    .page-one {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .feeling-buttons {
+      width: 100%;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: flex-start;
+    }
+
+    .feeling-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: transform 0.2s;
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+    }
+
+    .feeling-button--lightning {
+      margin-top: 70px;
+    }
+
+    .feeling-button--tornado {
+      margin-top: 200px;
+    }
+
+    .feeling-button--rain {
+      margin-top: 200px;
+    }
+
+    .feeling-button:hover {
+      transform: scale(1.1);
+    }
+
+    h1 {
+      font-size: 5vw;
+      letter-spacing: 1px;
+      margin: 0;
+      color: #000;
+    }
+
+    p {
+      margin: 0;
+      font-size: 3vw;
+      color: #000;
+    }
+
+    .frazzled-logo {
+      width: 25vw;
+    }
+  </style>
+</head>
 <body>
-  <h1>Frazzled</h1>
-  <p>Welcome to my website!</p>
-  <img src="https://content.codecademy.com/articles/github-pages-via-web-app/happy-ice-cream.gif" />
-</body>
 
+  <div class="container">
+
+    <div class="page page-one">
+
+      <div class="top-text">
+        <h1>How's the weather <br>in your head today?</h1>
+        <p>Tap a weather icon to trigger the Feeling Ceiling above.</p>
+      </div>
+
+      <div class="feeling-buttons">
+
+        <button class="feeling-button feeling-button--lightning">
+          <img src="lightning.svg" alt="" />
+        </button>
+
+        <button class="feeling-button feeling-button--sun">
+          <img src="sun.svg" alt="" />
+        </button>
+
+        <button class="feeling-button feeling-button--tornado">
+          <img src="tornado.svg" alt="" />
+        </button>
+
+        <button class="feeling-button feeling-button--clouds">
+          <img src="clouds.svg" alt="" />
+        </button>
+
+        <button class="feeling-button feeling-button--rain">
+          <img src="rain.svg" alt="" />
+        </button>
+        
+      </div>
+
+      <img class="frazzled-logo" src="frazzled.svg" alt="">
+
+    </div>
+
+    <div class="page page-two" style="display: none;">
+
+      <h1>85% of people feel <br>better after a free chat <br>with our community.</h1>
+
+      <img class="mug mug-one" src="mug-1.svg" alt="">
+
+      <img class="mug mug-two" src="mug-2.svg" alt="">
+
+      <div>
+        <h2>Learn more at frazzled.uk</h2>
+      </div>
+
+      <img src="frazzled.svg" alt="">
+
+    </div>
+
+  </div>
+
+</body>
 </html>
