@@ -30,28 +30,27 @@
 
     .container {
       height: 100%;
-      width: 100%;
+      width: 100vw;
       max-width: 1180px;
       max-height: 820px;
     }
 
     .page {
+      position: relative;
       height: 100%;
+      width: 100%;
       text-align: center;
       padding: 24px;
-    }
-
-    .page-one {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
-      gap: 24px;
+      gap: 24px
     }
 
     .feeling-buttons {
       width: 100%;
-      max-height: 400px;
+      max-height: 320px;
       display: flex;
       justify-content: space-evenly;
       align-items: flex-start;
@@ -68,15 +67,15 @@
     }
 
     .feeling-button--lightning {
-      margin-top: 50px;
+      margin-top: 5%;
     }
 
     .feeling-button--tornado {
-      margin-top: 150px;
+      margin-top: 10%;
     }
 
     .feeling-button--rain {
-      margin-top: 150px;
+      margin-top: 12%;
     }
 
     .feeling-button:hover {
@@ -84,7 +83,7 @@
     }
 
     h1 {
-      font-size: 50px;
+      font-size: 60px;
       margin: 0;
       color: #000;
     }
@@ -95,8 +94,48 @@
       color: #000;
     }
 
+    .learn-more {
+      background-color: #ff501a;
+      display: inline-flex;
+      padding: 12px 32px;
+      border-radius: 40px;
+    }
+
+    h2 {
+      font-size: 40px;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .mug {
+      position: absolute;
+      width: 100%;
+      max-width: 200px;
+      height: auto;
+    }
+
+    .mug-one {
+      left: 8%;
+      bottom: 45%;
+    }
+
+    .mug-two {
+      right: 8%;
+      bottom: 25%;
+    }
+ 
     .frazzled-logo {
-      width: 250px;
+      max-width: 350px;
+    }
+
+    #countdown-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 5px;
+      background-color: #ff501a;
+      width: 100%;
+      transform-origin: left;
     }
   </style>
 </head>
@@ -104,7 +143,9 @@
 
   <div class="container">
 
-    <div class="page page-one">
+    <div id="countdown-bar" style="display: none;"></div>
+
+    <div id="pageOne" class="page">
 
       <div class="top-text">
         <h1>How's the weather <br>in your head today?</h1>
@@ -139,19 +180,19 @@
 
     </div>
 
-    <div class="page page-two" style="display: none;">
+    <div id="pageTwo" class="page" style="display: none;">
 
       <h1>85% of people feel <br>better after a free chat <br>with our community.</h1>
 
-      <img class="mug mug-one" src="mug-1.svg" alt="">
+      <img class="mug mug-one" src="mug-left.svg" alt="">
 
-      <img class="mug mug-two" src="mug-2.svg" alt="">
+      <img class="mug mug-two" src="mug-right.svg" alt="">
 
-      <div>
+      <div class="learn-more">
         <h2>Learn more at frazzled.uk</h2>
       </div>
 
-      <img src="frazzled.svg" alt="">
+      <img class="frazzled-logo" src="frazzled.svg" alt="">
 
     </div>
 
@@ -171,7 +212,7 @@
       tornado: 10417,   // Advert 3
       clouds: 10420,    // Advert 4
       rain: 10423       // Advert 5
-      // You can add "stop": 10451 if needed
+      // stop: 10451
     };
   
     function sendInterrupt(interruptId) {
@@ -201,11 +242,53 @@
       });
     }
   
-    document.querySelector(".feeling-button--lightning").addEventListener("click", () => sendInterrupt(interruptIds.lightning));
-    document.querySelector(".feeling-button--sun").addEventListener("click", () => sendInterrupt(interruptIds.sun));
-    document.querySelector(".feeling-button--tornado").addEventListener("click", () => sendInterrupt(interruptIds.tornado));
-    document.querySelector(".feeling-button--clouds").addEventListener("click", () => sendInterrupt(interruptIds.clouds));
-    document.querySelector(".feeling-button--rain").addEventListener("click", () => sendInterrupt(interruptIds.rain));
+    function showPageTwoTemporarily() {
+      const pageOne = document.getElementById("pageOne");
+      const pageTwo = document.getElementById("pageTwo");
+      const countdownBar = document.getElementById("countdown-bar");
+
+      pageOne.style.display = "none";
+      pageTwo.style.display = "flex";
+
+      // Reset and trigger the animation
+      countdownBar.style.display = "block";
+      countdownBar.style.transition = "none";
+      countdownBar.style.width = "100%";
+      // Force reflow to restart animation
+      void countdownBar.offsetWidth;
+      countdownBar.style.transition = "width 10s linear";
+      countdownBar.style.width = "0%";
+
+      setTimeout(() => {
+        pageTwo.style.display = "none";
+        pageOne.style.display = "flex";
+      }, 10000);
+    }
+  
+    document.querySelector(".feeling-button--lightning").addEventListener("click", () => {
+      sendInterrupt(interruptIds.lightning);
+      showPageTwoTemporarily();
+    });
+  
+    document.querySelector(".feeling-button--sun").addEventListener("click", () => {
+      sendInterrupt(interruptIds.sun);
+      showPageTwoTemporarily();
+    });
+  
+    document.querySelector(".feeling-button--tornado").addEventListener("click", () => {
+      sendInterrupt(interruptIds.tornado);
+      showPageTwoTemporarily();
+    });
+  
+    document.querySelector(".feeling-button--clouds").addEventListener("click", () => {
+      sendInterrupt(interruptIds.clouds);
+      showPageTwoTemporarily();
+    });
+  
+    document.querySelector(".feeling-button--rain").addEventListener("click", () => {
+      sendInterrupt(interruptIds.rain);
+      showPageTwoTemporarily();
+    });
   </script>  
 
 </body>
