@@ -23,17 +23,22 @@
       font-family: 'Anton', sans-serif;
       background-color: #fff6ee;
       overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .container {
       height: 100%;
       width: 100%;
+      max-width: 1180px;
+      max-height: 820px;
     }
 
     .page {
       height: 100%;
       text-align: center;
-      padding: 2vw;
+      padding: 24px;
     }
 
     .page-one {
@@ -41,11 +46,12 @@
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
-      gap: 50px;
+      gap: 24px;
     }
 
     .feeling-buttons {
       width: 100%;
+      max-height: 400px;
       display: flex;
       justify-content: space-evenly;
       align-items: flex-start;
@@ -57,21 +63,20 @@
       cursor: pointer;
       padding: 0;
       transition: transform 0.2s;
-      width: 100%;
-      max-width: 300px;
+      width: 200px;
       height: auto;
     }
 
     .feeling-button--lightning {
-      margin-top: 70px;
+      margin-top: 50px;
     }
 
     .feeling-button--tornado {
-      margin-top: 200px;
+      margin-top: 150px;
     }
 
     .feeling-button--rain {
-      margin-top: 200px;
+      margin-top: 150px;
     }
 
     .feeling-button:hover {
@@ -79,20 +84,19 @@
     }
 
     h1 {
-      font-size: 5vw;
-      letter-spacing: 1px;
+      font-size: 50px;
       margin: 0;
       color: #000;
     }
 
     p {
       margin: 0;
-      font-size: 3vw;
+      font-size: 30px;
       color: #000;
     }
 
     .frazzled-logo {
-      width: 25vw;
+      width: 250px;
     }
   </style>
 </head>
@@ -152,6 +156,57 @@
     </div>
 
   </div>
+
+  <script>
+    const endpoint = "https://wbtapi.signagelive.com/networks/18518/messages";
+    const headers = {
+      "X-SIGNAGELIVE-WBI-APP-ID": "af177d46-f9e6-48d5-8700-780f8c113856",
+      "X-SIGNAGELIVE-WBI-APP-KEY": "e1f53e54-0f09-4fe2-b393-64bcbc708eb2",
+      "Content-Type": "application/json"
+    };
+  
+    const interruptIds = {
+      lightning: 10411, // Advert 1
+      sun: 10414,       // Advert 2
+      tornado: 10417,   // Advert 3
+      clouds: 10420,    // Advert 4
+      rain: 10423       // Advert 5
+      // You can add "stop": 10451 if needed
+    };
+  
+    function sendInterrupt(interruptId) {
+      const body = JSON.stringify({
+        interrupt: interruptId,
+        players: [101551],
+        groups: []
+      });
+  
+      fetch(endpoint, {
+        method: "POST",
+        headers,
+        body
+      })
+      .then(response => {
+        if (response.status === 201) {
+          return response.json();
+        } else {
+          throw new Error(`Unexpected response: ${response.status}`);
+        }
+      })
+      .then(data => {
+        console.log("Success:", data);
+      })
+      .catch(error => {
+        console.error("Error:", error);
+      });
+    }
+  
+    document.querySelector(".feeling-button--lightning").addEventListener("click", () => sendInterrupt(interruptIds.lightning));
+    document.querySelector(".feeling-button--sun").addEventListener("click", () => sendInterrupt(interruptIds.sun));
+    document.querySelector(".feeling-button--tornado").addEventListener("click", () => sendInterrupt(interruptIds.tornado));
+    document.querySelector(".feeling-button--clouds").addEventListener("click", () => sendInterrupt(interruptIds.clouds));
+    document.querySelector(".feeling-button--rain").addEventListener("click", () => sendInterrupt(interruptIds.rain));
+  </script>  
 
 </body>
 </html>
