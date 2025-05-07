@@ -12,6 +12,13 @@
       font-style: normal;
     }
 
+    @font-face {
+      font-family: 'GeneralSans';
+      src: url('GeneralSans-Regular.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
     * {
       box-sizing: border-box;
     }
@@ -63,28 +70,37 @@
       padding: 0;
       transition: transform 0.2s;
       width: 200px;
+      max-height: 200px;
+      height: auto;
+    }
+
+    .feeling--image {
+      width: 100%;
+      max-height: 200px;
       height: auto;
     }
 
     .feeling-button--lightning {
-      margin-top: 5%;
+      margin-top: 8%;
     }
 
     .feeling-button--tornado {
-      margin-top: 10%;
+      margin-top: 8%;
     }
 
     .feeling-button--rain {
-      margin-top: 12%;
+      margin-top: 8%;
     }
 
-    .feeling-button:hover {
-      transform: scale(1.1);
+    .feeling-button:active {
+      transform: scale(0.9);
     }
 
     h1 {
       font-size: 60px;
       margin: 0;
+      line-height: 1.25;
+      margin-bottom: 16px;
       color: #000;
     }
 
@@ -104,6 +120,12 @@
     h2 {
       font-size: 40px;
       text-transform: uppercase;
+      margin: 0;
+    }
+
+    h3 {
+      font-family: 'GeneralSans', sans-serif;
+      font-size: 20px;
       margin: 0;
     }
 
@@ -154,25 +176,40 @@
 
       <div class="feeling-buttons">
 
-        <button class="feeling-button feeling-button--lightning">
-          <img src="lightning.svg" alt="" />
-        </button>
+        <div class="feeling-button--lightning button-container">
+          <button class="feeling-button">
+            <img class="feeling--image" src="lightning.svg" alt="" />
+          </button>
+          <h3>Stormy</h3>
+        </div>
 
-        <button class="feeling-button feeling-button--sun">
-          <img src="sun.svg" alt="" />
-        </button>
+        <div class="feeling-button--sun button-container">
+          <button class="feeling-button">
+            <img class="feeling--image" src="sun.svg" alt="" />
+          </button>
+          <h3>Sunny</h3>
+        </div>
 
-        <button class="feeling-button feeling-button--tornado">
-          <img src="tornado.svg" alt="" />
-        </button>
+        <div class="feeling-button--tornado button-container">
+          <button class="feeling-button">
+            <img class="feeling--image" src="tornado.svg" alt="" />
+          </button>
+          <h3>Foggy</h3>
+        </div>
 
-        <button class="feeling-button feeling-button--clouds">
-          <img src="clouds.svg" alt="" />
-        </button>
+        <div class="feeling-button--clouds button-container">
+          <button class="feeling-button">
+            <img class="feeling--image" src="clouds.svg" alt="" />
+          </button>
+          <h3>Gloomy</h3>
+        </div>
 
-        <button class="feeling-button feeling-button--rain">
-          <img src="rain.svg" alt="" />
-        </button>
+        <div class="feeling-button--rain button-container">
+          <button class="feeling-button">
+            <img class="feeling--image" src="rain.svg" alt="" />
+          </button>
+          <h3>Rainy</h3>
+        </div>
         
       </div>
 
