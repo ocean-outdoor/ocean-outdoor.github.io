@@ -93,7 +93,7 @@
       margin-top: 8%;
     }
 
-    .feeling-button:active {
+    .feeling-button.active {
       transform: scale(0.9);
     }
 
@@ -245,12 +245,11 @@
     };
   
     const interruptIds = {
-      lightning: 10420, // Advert 1
-      sun: 10417,       // Advert 2
-      tornado: 10414,   // Advert 3
-      clouds: 10411,    // Advert 4
-      rain: 10423       // Advert 5
-      // stop: 10451
+      lightning: 10420,
+      sun: 10417,
+      tornado: 10414,
+      clouds: 10411,
+      rain: 10423
     };
   
     function sendInterrupt(interruptId) {
@@ -284,50 +283,44 @@
       const pageOne = document.getElementById("pageOne");
       const pageTwo = document.getElementById("pageTwo");
       const countdownBar = document.getElementById("countdown-bar");
-
+  
       pageOne.style.display = "none";
       pageTwo.style.display = "flex";
-
-      // Reset and trigger the animation
+  
       countdownBar.style.display = "block";
       countdownBar.style.transition = "none";
       countdownBar.style.width = "100%";
-      // Force reflow to restart animation
-      void countdownBar.offsetWidth;
+      void countdownBar.offsetWidth; // force reflow
       countdownBar.style.transition = "width 10s linear";
       countdownBar.style.width = "0%";
-
+  
       setTimeout(() => {
         pageTwo.style.display = "none";
         pageOne.style.display = "flex";
       }, 10000);
     }
   
-    document.querySelector(".feeling-button--lightning").addEventListener("click", () => {
-      sendInterrupt(interruptIds.lightning);
-      showPageTwoTemporarily();
+    function handleClick(interruptId) {
+      sendInterrupt(interruptId);
+      setTimeout(showPageTwoTemporarily, 100); // short delay for press feedback
+    }
+  
+    // Set up active class feedback on all buttons
+    const buttons = document.querySelectorAll(".feeling-button");
+    buttons.forEach((button) => {
+      button.addEventListener("touchstart", () => button.classList.add("active"));
+      button.addEventListener("touchend", () => button.classList.remove("active"));
+      button.addEventListener("mousedown", () => button.classList.add("active"));
+      button.addEventListener("mouseup", () => button.classList.remove("active"));
     });
   
-    document.querySelector(".feeling-button--sun").addEventListener("click", () => {
-      sendInterrupt(interruptIds.sun);
-      showPageTwoTemporarily();
-    });
-  
-    document.querySelector(".feeling-button--tornado").addEventListener("click", () => {
-      sendInterrupt(interruptIds.tornado);
-      showPageTwoTemporarily();
-    });
-  
-    document.querySelector(".feeling-button--clouds").addEventListener("click", () => {
-      sendInterrupt(interruptIds.clouds);
-      showPageTwoTemporarily();
-    });
-  
-    document.querySelector(".feeling-button--rain").addEventListener("click", () => {
-      sendInterrupt(interruptIds.rain);
-      showPageTwoTemporarily();
-    });
-  </script>  
+    // Assign click handlers to containers
+    document.querySelector(".feeling-button--lightning").addEventListener("click", () => handleClick(interruptIds.lightning));
+    document.querySelector(".feeling-button--sun").addEventListener("click", () => handleClick(interruptIds.sun));
+    document.querySelector(".feeling-button--tornado").addEventListener("click", () => handleClick(interruptIds.tornado));
+    document.querySelector(".feeling-button--clouds").addEventListener("click", () => handleClick(interruptIds.clouds));
+    document.querySelector(".feeling-button--rain").addEventListener("click", () => handleClick(interruptIds.rain));
+  </script>   
 
 </body>
 </html>
