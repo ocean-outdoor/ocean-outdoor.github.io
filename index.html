@@ -300,13 +300,13 @@
       countdownBar.style.transition = "none";
       countdownBar.style.width = "100%";
       void countdownBar.offsetWidth; // force reflow
-      countdownBar.style.transition = "width 10s linear";
+      countdownBar.style.transition = "width 30s linear";
       countdownBar.style.width = "0%";
   
       setTimeout(() => {
         pageTwo.style.display = "none";
         pageOne.style.display = "flex";
-      }, 10000);
+      }, 30000);
     }
   
     function handleClick(interruptId) {
