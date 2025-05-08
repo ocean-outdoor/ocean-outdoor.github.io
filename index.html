@@ -117,6 +117,8 @@
       display: inline-flex;
       padding: 12px 32px;
       border-radius: 40px;
+      text-decoration: none;
+      color: #000;
     }
 
     h2 {
@@ -163,6 +165,10 @@
       width: 100%;
       transform-origin: left;
     }
+
+    .foggy-text {
+      margin-top: -54px;
+    }
   </style>
 </head>
 <body>
@@ -198,7 +204,7 @@
           <button class="feeling-button">
             <img class="feeling--image" src="tornado.svg" alt="" />
           </button>
-          <h3>Foggy</h3>
+          <h3 class="foggy-text">Foggy</h3>
         </div>
 
         <div class="feeling-button--clouds button-container">
@@ -229,9 +235,9 @@
 
       <img class="mug mug-two" src="mug-right.svg" alt="">
 
-      <div class="learn-more">
+      <a target="_blank" href="https://www.frazzledcafe.org/" class="learn-more">
         <h2>Learn more at frazzled.uk</h2>
-      </div>
+      </a>
 
       <img class="frazzled-logo" src="frazzled.svg" alt="">
 
